@@ -1,0 +1,159 @@
+<div class="est perfil">
+    <h4>Experiencia Laboral</h4>
+      <div class="btn-edit">
+        <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
+      </div>
+
+      <li *ngFor="let empleos of laboralList" style="list-style-type: none">
+        <div class="row">
+          <div class="col-lg-4">
+            <img  [src]="empleos.img" width=220px height=100px>
+          </div>
+  
+          <div class="col-lg-8">
+            <h3><strong>{{empleos.nombre}}</strong></h3>
+            <h4>{{empleos.posicion}}</h4>
+            <p>{{empleos.descripcion}}</p>
+            <p>{{empleos.fecha}}</p>
+                      
+          </div>
+  
+          <div class="btn-edit">
+            <a href="#" class="btn-rigth">
+                <i class='fas fa-pen'></i>
+            </a>
+          </div>
+          
+        </div>
+      </li>
+
+    <!-- Analisis Fiscal  
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/Logo_AF.png" width="90%" height="70%">
+      </div>
+
+      <div class="col-lg-8">
+        <p class="Analisis Fiscal"><strong>Dirección General de Análisis Fiscal y Estudios Económicos - Jefe División Recursos Nacionales</strong></p>
+        <p>2013-Actualidad</p>
+        <p>Análisis, proyecciones, series de recursos nacionales y provinciales. Costo y planta de personal, indicadores de gestión, informes gerenciales a ministro y secretarios del ministerio.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="Analisis Fiscal" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div>
+  
+    <!-- hospital
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/Logo_Hospi.png" width="70%" height="90%">
+      </div>
+
+      <div class="col-lg-8">
+        <p class="SERSE"><strong>Salud Entre Ríos S.E. – Responsable de Contabilidad</strong></p>
+        <p>2017-Actualidad</p>
+        <p>Responsable de la implementación, mantenimiento y seguimiento de la contabilidad de la empresa. Elaboración de Balances, Papeles de Trabajo y auditorías internas.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="SERSE" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div>
+
+
+    <!-- CFI
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/Logo_cfi.png">
+      </div>
+
+      <div class="col-lg-8">
+        <p class="CFI"><strong>Comisión Federal de Impuestos - Representante Alterno de Entre Ríos</strong></p>
+        <p>2020-Actualidad</p>
+        <p>Representar a la Provincia de Entre Ríos ante el Organismo Nacional. Desde 2016 como representante técnico y desde 2020 como representante alterno pleno.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="CFI" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div>
+
+
+    <!-- Ejemplar
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="#">
+      </div>
+
+      <div class="col-lg-8">
+        <p class="nucleo"><strong>Núcleo -  Auditor de empresa Ejemplar S.A.</strong></p>
+        <p>2019-Actualidad</p>
+        <p>Control de registros contables en sistema en la empresa y elaboración de análisis e informes de gestión respecto al funcionamiento de la misma.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="nucleo" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div>
+
+
+
+    <!-- FOGAER
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/Reunión_Fogaer.png" width=150px height=100px>
+      </div>
+
+      <div class="col-lg-8">
+        <p class="FOGAER"><strong>FOGAR SAPEM - Representante suplente del Consejo de Vigilancia</strong></p>
+        <p>2020-Actualidad</p>
+        <p>Control normativo de la sociedad.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="FOGAER" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div> -->
+
+  </div>

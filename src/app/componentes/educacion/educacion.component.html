@@ -1,0 +1,86 @@
+<div class="est perfil">
+    <h4>Educación</h4>
+    <div class="btn-edit">
+      <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
+    </div>
+    
+    <!-- Este es el diseño de estructura que tenian en la clase
+    <ul class="items-list">
+      <li *ngFor="let educacion of educacionList">
+        <div class="data-container">
+          <a href="#">
+            <div class="logo-image-container">
+              <img 
+              class="logo-image"
+              [src]="educacion.img">
+            </div>
+            <div class="list-info">
+              <div>
+                <h3>{{educacion.universidad}}</h3>
+                <h4>{{educacion.titulo}}</h4>
+                <p>{{educacion.descripcion}}</p>
+                <p>{{educacion.fecha}}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="data-control">
+          <div class="btn-edit">
+            <a href="#" class="btn-rigth"><i class="fas fa-pen"></i></a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    -->
+    
+    
+    <li *ngFor="let educacion of educacionList" style="list-style-type: none">
+      <div class="row">
+        <div class="col-lg-4">
+          <img [src]="educacion.img" width=220px height=100px>
+        </div>
+
+        <div class="col-lg-8">
+          <h3><strong>{{educacion.universidad}}</strong></h3>
+          <h4>{{educacion.titulo}}</h4>
+          <p>{{educacion.descripcion}}</p>
+          <p>{{educacion.periodo}}</p>
+                    
+        </div>
+
+        <div class="btn-edit">
+          <a href="#" class="btn-rigth">
+              <i class='fas fa-pen'></i>
+          </a>
+        </div>
+        
+      </div>
+    </li>
+  
+    <!-- diseño inicial, incluye la edición por medio de script de primeras clases, por eso queda guardado
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/FCECO.png">
+      </div>
+
+      <div class="col-lg-8">
+        <p class="PyME"><strong>Curso de Posgrado en Asesoramiento Tributario y Previsional para la Gestión PyME - UNER</strong></p>
+        <p>2015-2015</p>
+        <p>Incorpora conocimientos técnicos respecto a la gestión tributaria y previsional aplicado a las pequeñas y medianas empresas. Planificación fiscal, aspectos previsionales y tributarios locales y nacionales.</p>
+        
+        
+      </div>
+
+      <div class="btn-edit" onclick="cambiarParrafo()">
+        <a href="#" class="btn-rigth">
+            <i class='fas fa-pen'></i>
+        </a>
+      </div>
+
+      <div>
+          <input id="PyME" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
+      </div>
+    </div>
+    -->
+
+  </div>

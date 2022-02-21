@@ -1,0 +1,14 @@
+#image1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#fotoPerfil {
+    position: absolute;
+    top: 260px;
+    left: 185px;
+    height: 30%;
+    
+}

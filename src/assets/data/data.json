@@ -1,0 +1,62 @@
+{
+    "nombre": "Néstor Damián Kessler",
+    "profesion": "Contador Público",
+    "residencia": "Paraná, Entre Ríos, Argentina",
+    "empleos": [{
+        "nombre": "Dirección General de Análisis Fiscal y Estudios Económicos",
+        "posicion": "Jefe División Recursos Nacionales",
+        "fecha": "2013-Actualidad",
+        "descripcion": "Análisis, proyecciones, series de recursos nacionales y provinciales. Costo y planta de personal, indicadores de gestión, informes gerenciales a ministro y secretarios del ministerio.",
+        "img": "./assets/Logo_AF.png"
+        },
+        {"nombre": "Salud Entre Ríos S.E.",
+            "posicion": "Responsable de Contabilidad",
+            "fecha": "2017-Actualidad",
+            "descripcion": "Responsable de la implementación, mantenimiento y seguimiento de la contabilidad de la empresa. Elaboración de Balances, Papeles de Trabajo y auditorías internas.",
+            "img": "./assets/Logo_Hospi.png"
+        },
+        {"nombre": "Comisión Federal de Impuestos ",
+            "posicion": "Representante Alterno de Entre Ríos",
+            "fecha": "2020-Actualidad",
+            "descripcion": "Representar a la Provincia de Entre Ríos ante el Organismo Nacional. Desde 2016 como representante técnico y desde 2020 como representante alterno pleno.",
+            "img": "./assets/Logo_cfi.png"
+        },
+        {"nombre": "Núcleo",
+            "posicion": "Auditor de empresa Ejemplar S.A.",
+            "fecha": "2019-Actualidad",
+            "descripcion": "Control de registros contables en sistema en la empresa y elaboración de análisis e informes de gestión respecto al funcionamiento de la misma.",
+            "img": "./assets/Logo_nucleo.png"
+        },
+        {"nombre": "FOGAR SAPEM",
+            "posicion": "Representante suplente del Consejo de Vigilancia",
+            "fecha": "2020-Actualidad",
+            "descripcion": "Control normativo de la sociedad.",
+            "img": "./assets/Reunión_Fogaer.png"
+        }
+    ],
+
+    "educacion": [{
+        "titulo": "Curso de posgrado en Derecho y Fintech – Marco regulatorio de las tecnologías en el sector financiero - UCA",
+        "universidad": "UCA",
+        "periodo": "2020 - 2020",
+        "descripcion": "Incorpora nuevas herramientas tecnológicas aplicadas a las Finanzas. Criptoactivos, blockchain y Smart Contract, firma electrónica y digital, medios de pago digital, entre otros temas.",
+        "img": "./assets/UCA1.png"
+        },
+
+        {
+        "titulo": "Curso de Posgrado en Asesoramiento Tributario y Previsional para la Gestión PyME - UNER",
+        "universidad": "UNER",
+        "periodo": "2015 - 2015",
+        "descripcion": "Incorpora conocimientos técnicos respecto a la gestión tributaria y previsional aplicado a las pequeñas y medianas empresas. Planificación fiscal, aspectos previsionales y tributarios locales y nacionales.",
+        "img": "./assets/FCECO.png"
+        },
+
+        {
+        "titulo": "Contador Público - UNER",
+        "universidad": "UNER",
+        "periodo": "2008 - 2015",
+        "descripcion": "Carrera de Grado vinculada a las Ciencias Económicas.",
+        "img": "./assets/FCECO.png"
+
+    }]
+}

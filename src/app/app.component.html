@@ -1,0 +1,50 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+
+<body>
+  <!-- faltan incorporar los diferentes parrafos de cambio -->
+  <script>
+    function cambiarParrafo(){
+        document.getElementById("mi-descripcion").style.display="block";
+        let texto = document.getElementById("mi-descripcion").innerText;
+        console.log(texto);
+
+    }
+    function ingresarTextoNuevo(valor){
+        document.getElementById("mi-descripcion").innerText = valor;
+
+
+    }
+
+  </script>
+
+  <app-navbar></app-navbar>
+
+  <div class="container" role="main">
+
+    <app-encabezado></app-encabezado>
+
+    <br>
+    <br>
+
+    <app-laboral></app-laboral>
+
+    <br>
+    <br>
+    
+    <app-educacion></app-educacion>
+
+      
+
+  </div>
+
+</body>
+<router-outlet></router-outlet>
