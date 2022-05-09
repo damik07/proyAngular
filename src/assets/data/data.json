@@ -58,5 +58,44 @@
         "descripcion": "Carrera de Grado vinculada a las Ciencias Económicas.",
         "img": "./assets/FCECO.png"
 
+    }],
+    "habilidades":[
+        {
+        "nombre": "Liderazgo",
+        "label": ["Positivo", "Negativo"],
+        "data": 70,
+        "color": "#029EE1"
+        },
+        {
+        "nombre": "Trabajo en Equipo",
+        "label": ["Positivo", "Negativo"],
+        "data": 80,
+        "color": "#C841F0"
+        },
+        {
+        "nombre": "Solución de Conflictos",
+        "label": ["Positivo", "Negativo"],
+        "data": 80,
+        "color": "#F91616"
+        },
+        
+                
+        {
+        "nombre": "Excel",
+        "label": ["Positivo", "Negativo"],
+        "data": 90,
+        "color": "#00ff43"
+        }
+                
+    ],
+    "proyectos":[{
+        "Nombre": "Portfolio Web - Argentina Programa",
+        "Fecha de realización": "2022",
+        "Link": "http://localhost:4200/"},
+        {
+        "Nombre": "Proyecto Java Web - Argentina Programa",
+        "Fecha de realización": "2022",
+        "Link": "http://localhost:8080/JavaWeb"
+
     }]
 }

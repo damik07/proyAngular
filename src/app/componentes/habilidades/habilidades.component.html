@@ -1,0 +1,35 @@
+<div class="est perfil" >
+    <h4>Habilidades duras y blandas</h4>
+        <div class="btn-edit">
+        <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
+        </div>
+
+        <div class="container" >
+        
+        <li *ngFor="let habilidades of habilidadesList" style="list-style-type: none">
+            <div class="card" id="contenedor">
+                
+                <div class="box">
+                    
+                    <div class="percent">
+                        <svg>
+                            <circle cx="70" cy="70" r="70" ></circle>
+                            <circle cx="70" cy="70" r="70" [ngStyle]="{'stroke':habilidades.color, 'stroke-dashoffset': (440 - (440 * habilidades.data) / 100)}"></circle>
+                        </svg>
+                        <div class="number">
+                            <h2>{{habilidades.data}}<span>%</span></h2>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text">{{habilidades.nombre}}</h2>
+                </div>
+                
+            </div>
+
+        </li>
+        </div>
+
+        
+    
+    
+</div>

@@ -10,6 +10,10 @@ import { LaboralComponent } from './componentes/laboral/laboral.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './componentes/login/login.component';
+import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
+import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +22,17 @@ import { LoginComponent } from './componentes/login/login.component';
     EncabezadoComponent,
     LaboralComponent,
     EducacionComponent,
-    LoginComponent
+    LoginComponent,
+    HabilidadesComponent,
+    ProyectosComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
