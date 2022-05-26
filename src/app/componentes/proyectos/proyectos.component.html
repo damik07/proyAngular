@@ -1,33 +1,45 @@
 <div class="est perfil" >
-    <h4>Proyectos</h4>
-        <div class="btn-edit">
-        <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
-        </div>
-
-        <div class="container" >
+  
+    <h4 id="titulos">Proyectos</h4>
+  
+      <div class="d-grid gap-2 d-md-flex btn-lg justify-content-md-end">      
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_proy">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+  
+  
+    
         
         <li *ngFor="let proyectos of proyectosList" style="list-style-type: none">
-            <div class="card" id="contenedor">
-                
-                <div class="box">
-                    
-                    <div class="percent">
-                        <svg>
-                            <circle cx="70" cy="70" r="70" ></circle>
-                            <circle cx="70" cy="70" r="70" ></circle>
-                        </svg>
-                        <div class="number">
-                            <h2>Nombre<span>%</span></h2>
-                        </div>
-                    </div>
-                    
-                    <h2 class="text">Dirección</h2>
+            <div class="row" id="contenedor">
+              <div class="col-lg-3">
+                <img  [src]="proyectos.img" width=220px height=100px>
+              </div>
+      
+              <div class="col-lg-8">
+                <h3 class="text"><strong>{{proyectos.nombre}}</strong></h3>
+                <h4>{{proyectos.fecha}}</h4>                
+                <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
+                          
+              </div>
+      
+              <div class="col-lg-1">
+                <div class="btn-group-vertical">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_proy">
+                    <i class="fas fa-pen"></i>
+                  </button>
+                  <br>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_proy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                    </svg>
+                  </button>
                 </div>
-                
+              </div>
+              
             </div>
-
-        </li>
-        </div>
+          </li>
 
         
     

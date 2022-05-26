@@ -8,11 +8,17 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
 import { LaboralComponent } from './componentes/laboral/laboral.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './componentes/login/login.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
 import { NgChartsModule } from 'ng2-charts';
+import { RegistroPersonasComponent } from './componentes/registro-personas/registro-personas.component';
+import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
+import { PorfolioService } from './servicios/porfolio/porfolio.service';
+import { InterceptorService } from './servicios/interceptor/interceptor.service';
+import { ModalComponent } from './componentes/modal/modal.component';
+
 
 
 @NgModule({
@@ -24,7 +30,10 @@ import { NgChartsModule } from 'ng2-charts';
     EducacionComponent,
     LoginComponent,
     HabilidadesComponent,
-    ProyectosComponent
+    ProyectosComponent,
+    RegistroPersonasComponent,
+    PortfolioComponent,
+    ModalComponent
   ],
   imports: [
     FormsModule,
@@ -32,9 +41,10 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    
   ],
-  providers: [],
+  providers: [PorfolioService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

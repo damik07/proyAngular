@@ -1,0 +1,4 @@
+#contenedorBody{
+    background: rgb(84,86,168);
+    background: linear-gradient(120deg, rgba(84,86,168,1) 9%, rgba(19,132,210,1) 32%);
+}

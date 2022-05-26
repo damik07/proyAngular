@@ -1,30 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  api = 'https://localhost:4200/api';
+  api = "http://localhost:8080/usuario/Ok";
+  currentUserSubject: BehaviorSubject<any>;
+  
 
-  token: any; 
+  constructor(private http:HttpClient) { 
+    console.log("El servicio de autenticación está corriendo");
+    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}'))
+  }
 
-  constructor(private http: HttpClient, private router: Router) { }
+  Login(credenciales:any):Observable<any> {
+    console.log(credenciales);
+    return this.http.post(this.api, credenciales).pipe(map(data=>{
+      sessionStorage.setItem('currentUser', JSON.stringify(data));
+      this.currentUserSubject.next(data);
+      
+      return data;
+      
+    }))
+  }
 
-  login(cuit:number, email:string, password:string) {
-    this.http.post(this.api + '/autenticate', {cuit:cuit,email:email,password:password}).subscribe((resp:any)=> 
-    {this.router.navigate(['profile']);
-    localStorage.setItem('auth_token', resp.token);
-    });
+  get UsuarioAutenticado() {
+    return this.currentUserSubject.value;
   }
 
   logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('currentUser');
   }
 
   public get logIn(): boolean {
-    return (localStorage.getItem('token') !== null);
+    return (sessionStorage.getItem('currentUser') == "true"); //tenia registrado un == !null
   }
 
 }

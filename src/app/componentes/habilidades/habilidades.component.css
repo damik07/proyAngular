@@ -1,11 +1,14 @@
 *
 {
-    margin: 0;
+    margin: 1;
     padding: 0;
     font-family: calibri;
     justify-items: center;
     
 
+}
+#titulos{
+    color: #81EEED;
 }
 svg {
     position: relative;
@@ -128,4 +131,5 @@ svg circle:nth-child(2){
 .card:hover .text{
     color: #fff;
 }
+
 

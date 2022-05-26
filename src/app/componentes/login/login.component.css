@@ -1,10 +1,11 @@
-input:focus {
+/*input:focus {
     outline: unset;
   }
-  /* agregar borde rojo a los input que estén en estado inválido */
+  agregar borde rojo a los input que estén en estado inválido 
   .ng-invalid {
     border: 1px solid red;
   }
   .ng-valid{
     border:  1px solid green;
   }
+  */

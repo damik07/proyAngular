@@ -1,159 +1,136 @@
 <div class="est perfil">
-    <h4>Experiencia Laboral</h4>
-      <div class="btn-edit">
-        <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
+  <h4 id="titulos"><span>Experiencia Laboral</span>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_lab">
+      <i class="fas fa-plus"></i>
+    </button></h4>
+  <br>
+  
+
+  <li style="list-style-type: none">
+    <div class="row" id="contenedor" *ngFor="let empleos of laboralList">
+      <div class="col-lg-3">
+        <img [src]="empleos.img" width=220px height=100px>
       </div>
 
-      <li *ngFor="let empleos of laboralList" style="list-style-type: none">
-        <div class="row">
-          <div class="col-lg-4">
-            <img  [src]="empleos.img" width=220px height=100px>
-          </div>
-  
-          <div class="col-lg-8">
-            <h3><strong>{{empleos.nombre}}</strong></h3>
-            <h4>{{empleos.posicion}}</h4>
-            <p>{{empleos.descripcion}}</p>
-            <p>{{empleos.fecha}}</p>
-                      
-          </div>
-  
-          <div class="btn-edit">
-            <a href="#" class="btn-rigth">
-                <i class='fas fa-pen'></i>
-            </a>
-          </div>
-          
+      <div class="col-lg-8">
+        <h3 class="text"><strong>{{empleos.nombre}}</strong></h3>
+        <h4>{{empleos.posicion}}</h4>
+        <p>{{empleos.descripcion}}</p>
+        <p>{{empleos.fecha}}</p>
+
+      </div>
+
+      <div class="col-lg-1">
+        <div class="btn-group-vertical">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#editar_lab'+ empleos.id">
+            <i class='fas fa-pen'></i>
+          </button>
+          <br>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            [attr.data-bs-target]="'#delete_lab'+ empleos.id">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+            </svg>
+          </button>
         </div>
-      </li>
-
-    <!-- Analisis Fiscal  
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="assets/Logo_AF.png" width="90%" height="70%">
       </div>
 
-      <div class="col-lg-8">
-        <p class="Analisis Fiscal"><strong>Dirección General de Análisis Fiscal y Estudios Económicos - Jefe División Recursos Nacionales</strong></p>
-        <p>2013-Actualidad</p>
-        <p>Análisis, proyecciones, series de recursos nacionales y provinciales. Costo y planta de personal, indicadores de gestión, informes gerenciales a ministro y secretarios del ministerio.</p>
-        
-        
+
+
+
+
+      <!-- modal de eliminar -->
+
+      <div class="modal fade" id="delete_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar Acerca de</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ¿Esta seguro que desea eliminar la información de Acerca de?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="click" (click)="(eliminar_lab(empleos))" class="btn btn-primary">Eliminar</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="btn-edit" onclick="cambiarParrafo()">
-        <a href="#" class="btn-rigth">
-            <i class='fas fa-pen'></i>
-        </a>
+      <!-- modal de edición acerca de -->
+
+      <div class="modal fade" id="editar_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_lab(empleos))">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Editar Acerca de</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Empresa</label>
+                <input type="text" class="form-control" formControlName="empresa" id="empresa">
+                <label for="exampleFormControlInput1" class="form-label">Posición</label>
+                <input type="text" class="form-control" formControlName="posicion" id="posicion">
+                <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
+                <input type="text" class="form-control" formControlName="fecha_desde" id="fecha_desde">
+                <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
+                <input type="text" class="form-control" formControlName="fecha_hasta" id="fecha_hasta">
+                <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+                <input type="text" class="form-control" formControlName="descripcion" id="descripcion">
+                <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+                <input type="text" class="form-control" formControlName="img" id="img">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Editar</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
-          <input id="Analisis Fiscal" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
-      </div>
+
+       <!-- modal de nuevo laboral -->
+
+       <div class="modal fade" id="nuevo_lab" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_lab())">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+             <div class="mb-3">
+               <label for="exampleFormControlInput1" class="form-label">Empresa</label>
+               <input type="text" class="form-control" id="nombre">
+               <label for="exampleFormControlInput1" class="form-label">Posición</label>
+               <input type="text" class="form-control" id="posicion">
+               <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
+               <input type="text" class="form-control" id="fecha_desde">
+               <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
+               <input type="text" class="form-control" id="fecha_hasta">
+               <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+               <input type="text" class="form-control" id="descripcion">
+               <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+               <input type="text" class="form-control" id="img">
+             </div>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+             <button type="submit" class="btn btn-primary">Nuevo</button>
+           </div>
+         </div>
+       </div>
+     </div>
+
     </div>
-  
-    <!-- hospital
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="assets/Logo_Hospi.png" width="70%" height="90%">
-      </div>
-
-      <div class="col-lg-8">
-        <p class="SERSE"><strong>Salud Entre Ríos S.E. – Responsable de Contabilidad</strong></p>
-        <p>2017-Actualidad</p>
-        <p>Responsable de la implementación, mantenimiento y seguimiento de la contabilidad de la empresa. Elaboración de Balances, Papeles de Trabajo y auditorías internas.</p>
-        
-        
-      </div>
-
-      <div class="btn-edit" onclick="cambiarParrafo()">
-        <a href="#" class="btn-rigth">
-            <i class='fas fa-pen'></i>
-        </a>
-      </div>
-
-      <div>
-          <input id="SERSE" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
-      </div>
-    </div>
-
-
-    <!-- CFI
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="assets/Logo_cfi.png">
-      </div>
-
-      <div class="col-lg-8">
-        <p class="CFI"><strong>Comisión Federal de Impuestos - Representante Alterno de Entre Ríos</strong></p>
-        <p>2020-Actualidad</p>
-        <p>Representar a la Provincia de Entre Ríos ante el Organismo Nacional. Desde 2016 como representante técnico y desde 2020 como representante alterno pleno.</p>
-        
-        
-      </div>
-
-      <div class="btn-edit" onclick="cambiarParrafo()">
-        <a href="#" class="btn-rigth">
-            <i class='fas fa-pen'></i>
-        </a>
-      </div>
-
-      <div>
-          <input id="CFI" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
-      </div>
-    </div>
-
-
-    <!-- Ejemplar
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="#">
-      </div>
-
-      <div class="col-lg-8">
-        <p class="nucleo"><strong>Núcleo -  Auditor de empresa Ejemplar S.A.</strong></p>
-        <p>2019-Actualidad</p>
-        <p>Control de registros contables en sistema en la empresa y elaboración de análisis e informes de gestión respecto al funcionamiento de la misma.</p>
-        
-        
-      </div>
-
-      <div class="btn-edit" onclick="cambiarParrafo()">
-        <a href="#" class="btn-rigth">
-            <i class='fas fa-pen'></i>
-        </a>
-      </div>
-
-      <div>
-          <input id="nucleo" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
-      </div>
-    </div>
-
-
-
-    <!-- FOGAER
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="assets/Reunión_Fogaer.png" width=150px height=100px>
-      </div>
-
-      <div class="col-lg-8">
-        <p class="FOGAER"><strong>FOGAR SAPEM - Representante suplente del Consejo de Vigilancia</strong></p>
-        <p>2020-Actualidad</p>
-        <p>Control normativo de la sociedad.</p>
-        
-        
-      </div>
-
-      <div class="btn-edit" onclick="cambiarParrafo()">
-        <a href="#" class="btn-rigth">
-            <i class='fas fa-pen'></i>
-        </a>
-      </div>
-
-      <div>
-          <input id="FOGAER" type="text" oninput="ingresarTextoNuevo(this.valor)" style="display:none">
-      </div>
-    </div> -->
-
-  </div>
+  </li>
+</div>

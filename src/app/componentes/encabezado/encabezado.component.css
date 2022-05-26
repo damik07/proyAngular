@@ -10,5 +10,29 @@
     top: 260px;
     left: 185px;
     height: 30%;
+    border-radius: 50%;
     
+}
+#contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+    background: #101010
+}
+.row{
+    
+    width: 1200px;
+    display: flex;
+    justify-content: space-around;
+
+}
+.text{
+    position: relative;
+    color: #777;    
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    margin-top: 20px;
+
 }

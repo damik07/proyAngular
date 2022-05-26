@@ -2,6 +2,7 @@
     "nombre": "Néstor Damián Kessler",
     "profesion": "Contador Público",
     "residencia": "Paraná, Entre Ríos, Argentina",
+    "acerca_de": "Contador de perfil bajo, acostumbrado al trabajo bajo presión, experiencia en diferentes sectores de la sociedad, público y privado. Gran manejo de herramientas informáticas, planillas de cálculos entre otras. Proactivo, siempre en busca de mejoras en pos de la institución.",
     "empleos": [{
         "nombre": "Dirección General de Análisis Fiscal y Estudios Económicos",
         "posicion": "Jefe División Recursos Nacionales",
@@ -89,13 +90,15 @@
                 
     ],
     "proyectos":[{
-        "Nombre": "Portfolio Web - Argentina Programa",
-        "Fecha de realización": "2022",
-        "Link": "http://localhost:4200/"},
+        "nombre": "Portfolio Web - Argentina Programa",
+        "fecha_realización": "2022",
+        "link": "http://localhost:4200/",
+        "img": "./assets/Logo_cfi.png"},
         {
-        "Nombre": "Proyecto Java Web - Argentina Programa",
-        "Fecha de realización": "2022",
-        "Link": "http://localhost:8080/JavaWeb"
+        "nombre": "Proyecto Java Web - Argentina Programa",
+        "fecha_realización": "2022",
+        "link": "http://localhost:8080/JavaWeb",
+        "img": "./assets/Logo_cfi.png"}
 
-    }]
+    ]
 }
