@@ -14,19 +14,21 @@ import { map } from 'rxjs';
 export class EncabezadoComponent implements OnInit {
 
   miEncabezado:any;
+  persona:any;
+  editPers:any;
   
 
   constructor(private datosPorfolio:PorfolioService, private formBuilder: FormBuilder ) { }
     
   editarPersona = new FormGroup({
     id: new FormControl (''),
-    nombre: new FormControl (''),
-    apellido: new FormControl (''),
-    profesion: new FormControl (''),
-    residencia: new FormControl (''),
-    acercaDe: new FormControl (''),
-    img_banner: new FormControl (''),
-    img_perfil: new FormControl (''),
+    nombre: new FormControl (),
+    apellido: new FormControl (),
+    profesion: new FormControl (),
+    residencia: new FormControl (),
+    acercaDe: new FormControl (),
+    img_banner: new FormControl (),
+    img_perfil: new FormControl (),
 
     });
 
@@ -38,24 +40,17 @@ export class EncabezadoComponent implements OnInit {
       this.editarPersona
     });
 
-    this.editarPersona.setValue({
-    'id': new FormControl (''),
-    'nombre': new FormControl (''),
-    'apellido': new FormControl (''),
-    'profesion': new FormControl (''),
-    'residencia': new FormControl (''),
-    'acercaDe': new FormControl (''),
-    'img_banner': new FormControl (''),
-    'img_perfil': new FormControl (''),
-
-    });
+   
 
     
     
   }
 
-  putForm(){
-    console.log('click');
+  putForm(enc:any){
+    console.log(enc.id);
+    this.editPers = this.editarPersona.value
+    console.log(this.editPers)
+    this.datosPorfolio.editarPersona(this.editPers, enc).subscribe();
   }
 
 }

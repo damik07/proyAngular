@@ -1,4 +1,4 @@
-*
+/* Esto provocó el error de los modales, padding y margin en cero
 {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
     justify-items: center;
     
 
-}
+}*/
 
 
 
@@ -15,7 +15,11 @@
     justify-content: center;
     align-items: center;
     min-height: 10vh;
-    background: #101010
+    background: #101010;
+    margin: 0;
+    padding: 0;
+    font-family: calibri;
+    justify-items: center;
 }
 .row{
     position: relative;

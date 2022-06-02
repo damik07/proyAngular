@@ -1,136 +1,136 @@
 <div class="est perfil">
   <h4 id="titulos"><span>Experiencia Laboral</span>
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_lab">
-      <i class="fas fa-plus"></i>
-    </button></h4>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_lab"
+      style="float: right;">
+      <i class="fas fa-plus"></i> Nuevo
+    </button>
+  </h4>
   <br>
-  
+</div>
 
-  <li style="list-style-type: none">
-    <div class="row" id="contenedor" *ngFor="let empleos of laboralList">
-      <div class="col-lg-3">
-        <img [src]="empleos.img" width=220px height=100px>
-      </div>
+<li style="list-style-type: none" *ngFor="let empleos of laboralList">
+  <div class="row" id="contenedor">
+    <div class="col-lg-3">
+      <img [src]="empleos.img" width=220px height=100px>
+    </div>
 
-      <div class="col-lg-8">
-        <h3 class="text"><strong>{{empleos.nombre}}</strong></h3>
-        <h4>{{empleos.posicion}}</h4>
-        <p>{{empleos.descripcion}}</p>
-        <p>{{empleos.fecha}}</p>
-
-      </div>
-
-      <div class="col-lg-1">
-        <div class="btn-group-vertical">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#editar_lab'+ empleos.id">
-            <i class='fas fa-pen'></i>
-          </button>
-          <br>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-            [attr.data-bs-target]="'#delete_lab'+ empleos.id">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill"
-              viewBox="0 0 16 16">
-              <path
-                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-
-
-
-
-      <!-- modal de eliminar -->
-
-      <div class="modal fade" id="delete_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Eliminar Acerca de</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ¿Esta seguro que desea eliminar la información de Acerca de?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="click" (click)="(eliminar_lab(empleos))" class="btn btn-primary">Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- modal de edición acerca de -->
-
-      <div class="modal fade" id="editar_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_lab(empleos))">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Editar Acerca de</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Empresa</label>
-                <input type="text" class="form-control" formControlName="empresa" id="empresa">
-                <label for="exampleFormControlInput1" class="form-label">Posición</label>
-                <input type="text" class="form-control" formControlName="posicion" id="posicion">
-                <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
-                <input type="text" class="form-control" formControlName="fecha_desde" id="fecha_desde">
-                <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
-                <input type="text" class="form-control" formControlName="fecha_hasta" id="fecha_hasta">
-                <label for="exampleFormControlInput3" class="form-label">Descripción</label>
-                <input type="text" class="form-control" formControlName="descripcion" id="descripcion">
-                <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
-                <input type="text" class="form-control" formControlName="img" id="img">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Editar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-       <!-- modal de nuevo laboral -->
-
-       <div class="modal fade" id="nuevo_lab" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-       aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_lab())">
-       <div class="modal-dialog">
-         <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
-             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-           </div>
-           <div class="modal-body">
-             <div class="mb-3">
-               <label for="exampleFormControlInput1" class="form-label">Empresa</label>
-               <input type="text" class="form-control" id="nombre">
-               <label for="exampleFormControlInput1" class="form-label">Posición</label>
-               <input type="text" class="form-control" id="posicion">
-               <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
-               <input type="text" class="form-control" id="fecha_desde">
-               <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
-               <input type="text" class="form-control" id="fecha_hasta">
-               <label for="exampleFormControlInput3" class="form-label">Descripción</label>
-               <input type="text" class="form-control" id="descripcion">
-               <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
-               <input type="text" class="form-control" id="img">
-             </div>
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-             <button type="submit" class="btn btn-primary">Nuevo</button>
-           </div>
-         </div>
-       </div>
-     </div>
+    <div class="col-lg-8">
+      <h3 class="text"><strong>{{empleos.nombre}}</strong></h3>
+      <h4>{{empleos.posicion}}</h4>
+      <p>{{empleos.descripcion}}</p>
+      <p>{{empleos.fecha}}</p>
 
     </div>
-  </li>
-</div>
+
+    <div class="col-lg-1">
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+          [attr.data-bs-target]="'#editar_lab'+ empleos.id">
+          <i class='fas fa-pen'></i>
+        </button>
+        <br>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+          [attr.data-bs-target]="'#delete_lab'+ empleos.id">
+          <i class='fas fa-trash-alt'></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <!-- modal de eliminar -->
+
+  <div class="modal fade" id="delete_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Experiencia Laboral</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Esta seguro que desea eliminar la información de Experiencia Laboral?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" (click)="(eliminar_lab(empleos))" class="btn btn-primary">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal de edición Laboral -->
+
+  <form class="modal fade" id="editar_lab{{empleos.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_lab(empleos))">
+    <div class="modal-dialog" [formGroup]="editarLaboral">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar Experiencia Laboral</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Empresa</label>
+            <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+            <input type="text" class="form-control" formControlName="nombre" id="nombre">
+            <label for="exampleFormControlInput1" class="form-label">Posición</label>
+            <input type="text" class="form-control" formControlName="posicion" id="posicion">
+            <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
+            <input type="text" class="form-control" formControlName="anioDesde" id="anioDesde">
+            <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
+            <input type="text" class="form-control" formControlName="anioHasta" id="anioHasta">
+            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+            <input type="text" class="form-control" formControlName="img" id="img">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Editar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <!-- modal de nuevo laboral -->
+
+  <form class="modal fade" id="nuevo_lab" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_lab())">
+    <div class="modal-dialog" [formGroup]="editarLaboral">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Empresa</label>
+            <input type="text" class="form-control" formControlName="nombre" id="nombre">
+            <label for="exampleFormControlInput1" class="form-label">Posición</label>
+            <input type="text" class="form-control" formControlName="posicion" id="posicion">
+            <label for="exampleFormControlInput2" class="form-label">Fecha desde</label>
+            <input type="text" class="form-control" formControlName="anioDesde" id="anioDesde">
+            <label for="exampleFormControlInput3" class="form-label">Fecha hasta</label>
+            <input type="text" class="form-control" formControlName="anioHasta" id="anioHasta">
+            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+            <input type="text" class="form-control" formControlName="img" id="img">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Nuevo</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+</li>

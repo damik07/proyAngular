@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PorfolioService } from 'src/app/servicios/porfolio/porfolio.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+
 
 
 @Component({
@@ -11,68 +13,76 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 export class LaboralComponent implements OnInit {
 
   laboralList:any;
-  @Output() onDeleteLaboral:EventEmitter <any> = new EventEmitter
+  editarLaboral:any;
+  nuevoLaboral:any;
   faPen = faPen;
-
-  nombre:String ="";
-  posicion:String ="";
-  fecha_desde:String ="";
-  fecha_hasta:String ="";
-  descripcion:String ="";
-  img:String ="";
+  newLab:any;
+  editLab:any;
   
 
+  onAddLaboral: EventEmitter<any> = new EventEmitter();
 
-  constructor(private datosPorfolio:PorfolioService) { }
+
+  
+  constructor(private datosPorfolio:PorfolioService, private fb:FormBuilder) { }
+
+    
 
   ngOnInit(): void {
     this.datosPorfolio.obtenerDatosLaboral().subscribe(data =>{
-      console.log(data);
+      //console.log(data);
       this.laboralList=data;
     });
+
+    this.editarLaboral = new FormGroup({
+      id: new FormControl (),
+      nombre: new FormControl (),
+      posicion: new FormControl (),
+      anioDesde: new FormControl (),
+      anioHasta: new FormControl (),
+      descripcion: new FormControl (),
+      img: new FormControl (),
+    
+    });
+
+    
+
   }
 
   eliminar_lab(empleos: any){
-    console.log(empleos.id);
-    this.datosPorfolio.borrarLaboral(empleos).subscribe(data=>{
-      this.laboralList = this.laboralList.filter( (t:any) =>{return t.id !== this.laboralList.id
-
-      })
-
+    //console.log(empleos.id);
+    this.datosPorfolio.borrarLaboral(empleos).subscribe(()=>{
+      //this.laboralList = this.laboralList.filter( t => t.id !== empleos.id)
+      alert("La experiencia laboral seleccionada se ha eliminado correctamente")
     });
   }
 
   editar_lab(empleos:any){
-    console.log(empleos.id);
-    const newLab = {
-      nombre: this.nombre,
-      posicion: this.posicion,
-      fecha_desde: this.fecha_desde,
-      fecha_hasta: this.fecha_hasta,
-      descripcion: this.descripcion,
-      img: this.img
-
-    }
-
+    //console.log(empleos.id);
+    this.editLab = this.editarLaboral.value
+    //console.log(this.editLab)
+    this.datosPorfolio.editarLaboral(this.editLab, empleos).subscribe(()=>{
+      alert("La experiencia laboral seleccionada se ha editado correctamente")
+    });
     
-
-    //this.datosPorfolio.editarLaboral(empleos).subscribe()
   }
 
 
   nuevo_lab(){
-      const newLab = {
-      nombre: this.nombre,
-      posicion: this.posicion,
-      fecha_desde: this.fecha_desde,
-      fecha_hasta: this.fecha_hasta,
-      descripcion: this.descripcion,
-      img: this.img
-
-    }
-    console.log(newLab);
+    this.newLab = this.editarLaboral.value
     
-    this.datosPorfolio.nuevoLaboral(newLab);
+      this.datosPorfolio.nuevoLaboral(this.newLab).subscribe(newLab=>{
+        alert("Se ha registrado una nueva experiencia laboral")
+      this.laboralList.push(newLab)
+    }
+
+
+    );
+
+    
+
+    
+
   }
 
 }

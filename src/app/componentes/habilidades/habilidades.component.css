@@ -1,12 +1,4 @@
-*
-{
-    margin: 1;
-    padding: 0;
-    font-family: calibri;
-    justify-items: center;
-    
 
-}
 #titulos{
     color: #81EEED;
 }
@@ -36,7 +28,11 @@ svg circle:nth-child(2){
     justify-content: center;
     align-items: center;
     min-height: 10vh;
-    background: #101010
+    background: #101010;
+    margin: 1;
+    padding: 0;
+    font-family: calibri;
+    justify-items: center;
 }
 .container{
     position: relative;

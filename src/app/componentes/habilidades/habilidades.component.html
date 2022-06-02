@@ -1,38 +1,145 @@
-<div class="est perfil" >
-    <h4 id="titulos">Habilidades duras y blandas</h4>
+<div class="est perfil">
+    <h4 id="titulos"><span>Habilidades duras y blandas</span>
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_hab"
+            style="float: right;">
+            <i class="fas fa-plus"></i> Nuevo
+        </button>
+    </h4>
     <br>
-        <!--
-        <div class="btn-edit">
-        <a href="#" class="btn-rigth"><i class="fas fa-plus"></i></a>
-        </div>
-        -->
 
-        <div class="container" >
-        
+
+    <div class="container">
+
         <li *ngFor="let habilidades of habilidadesList" style="list-style-type: none">
             <div class="card" id="contenedor">
-                
+
                 <div class="box">
-                    
+
                     <div class="percent">
                         <svg>
-                            <circle cx="70" cy="70" r="70" ></circle>
-                            <circle cx="70" cy="70" r="70" [ngStyle]="{'stroke':habilidades.color, 'stroke-dashoffset': (440 - (440 * habilidades.data) / 100)}"></circle>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70"
+                                [ngStyle]="{'stroke':habilidades.color, 'stroke-dashoffset': (440 - (440 * habilidades.data) / 100)}">
+                            </circle>
                         </svg>
                         <div class="number">
                             <h2>{{habilidades.data}}<span>%</span></h2>
                         </div>
                     </div>
-                    
+
                     <h2 class="text">{{habilidades.nombre}}</h2>
                 </div>
+
+                <div class="col-lg-8" style="text-align: center;">
                 
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#editar_hab'+ habilidades.id">
+                        <i class='fas fa-pen'></i>
+                    </button>
+                    
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#delete_hab'+ habilidades.id">
+                        <i class='fas fa-trash-alt'></i>
+                    </button>
+    
+                </div>
+
+            </div>
+               
+
+            
+
+
+
+            <!-- modal de eliminar -->
+
+            <div class="modal fade" id="delete_hab{{habilidades.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar Habilidad</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Esta seguro que desea eliminar la información de Habilidades?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" (click)="(eliminar_hab(habilidades))"
+                                class="btn btn-primary">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </li>
-        </div>
+            <!-- modal de edición Laboral -->
 
-        
-    
-    
+            <form class="modal fade" id="editar_hab{{habilidades.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                (ngSubmit)="(editar_hab(habilidades))">
+                <div class="modal-dialog" [formGroup]="editarHabilidades">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Editar Experiencia Laboral</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Habilidad</label>
+                                <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+                                <input type="text" class="form-control" formControlName="nombre" id="nombre">
+                                <label for="exampleFormControlInput1" class="form-label">Porcentaje de Habilidad (positivo en número entero)</label>
+                                <input type="text" class="form-control" formControlName="data" id="data">
+                                <label for="exampleFormControlInput2" class="form-label">Color</label>
+                                <input type="color" class="form-control" formControlName="color" id="color">
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- modal de nuevo laboral -->
+
+            <form class="modal fade" id="nuevo_hab" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_hab())">
+                <div class="modal-dialog" [formGroup]="editarHabilidades">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Habilidad</label>
+                                <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+                                <input type="text" class="form-control" formControlName="nombre" id="nombre">
+                                <label for="exampleFormControlInput1" class="form-label">Porcentaje de Habilidad (positivo en número entero)</label>
+                                <input type="text" class="form-control" formControlName="data" id="data">
+                                <label for="exampleFormControlInput2" class="form-label">Color</label>
+                                <input type="color" class="form-control" formControlName="color" id="color">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Nuevo</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </li>
+    </div>
+
+
+
+
 </div>

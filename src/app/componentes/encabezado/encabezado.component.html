@@ -1,31 +1,27 @@
 <!-- pagina principal -->
 <div class="container-fluid" *ngFor="let enc of miEncabezado">
   <div>
-        
-      <img id="logoEstudio" [src]="enc.img_banner" width="800" height="400">
-      
-    
-    <br>
-    <br>
-    
 
-    <div class="row" id="contenedor" >
-      
-      <div class="col-lg-3" >
+    <img id="logoEstudio" [src]="enc.img_banner" width="800" height="400">
+
+
+    <br>
+    <br>
+
+
+    <div class="row" id="contenedor">
+
+      <div class="col-lg-3">
         <img id="fotoPerfil" [src]="enc.img_perfil" top="100" position="absolute">
         <h3 class="text">{{enc.nombre}} {{enc.apellido}}</h3>
-          
-        <p>{{enc.profesion}}</p>
+
+        <h4>{{enc.profesion}}</h4>
         <p>{{enc.residencia}}</p>
-        <p><a class="btn btn-secondary" href="#">Más detalles &raquo;</a>"  "<button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_infopersona">
-          <i class='fas fa-pen'></i>
-        </button></p>
+        <p><a class="btn btn-secondary" href="#">Más detalles &raquo;</a>" "<button type="button"
+            class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#editar_infopersona'+ enc.id">
+            <i class='fas fa-pen'></i>
+          </button></p>
 
-        
-        
-        
-
-        
       </div>
 
       <br>
@@ -37,18 +33,19 @@
       </div>
       <div class="col-lg-1">
         <div class="btn-group-vertical">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_acercade">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            [attr.data-bs-target]="'#editar_acercaDe'+ enc.id">
             <i class='fas fa-pen'></i>
           </button>
 
           <br>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_acercade">
+          <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_acercade">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
               <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
             </svg>
-          </button>
+          </button>-->
 
-          
+
 
 
         </div>
@@ -59,8 +56,9 @@
 
     <!-- modal de edición persona -->
 
-    <div class="modal fade" id="editar_infopersona" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog" [formGroup]="editarPersona" (click)="putForm()">
+    <form class="modal fade" id="editar_infopersona{{enc.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="putForm(enc)">
+      <div class="modal-dialog" [formGroup]="editarPersona">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Editar Información Personal</h5>
@@ -69,13 +67,13 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-              <input type="text" class="form-control" formControlName="nombre">
+              <input type="text" class="form-control" formControlName="nombre" id="nombre">
               <label for="exampleFormControlInput1" class="form-label">Apellido</label>
-              <input type="text" class="form-control" formControlName="apellido">
+              <input type="text" class="form-control" formControlName="apellido" id="apellido">
               <label for="exampleFormControlInput2" class="form-label">Profesion</label>
-              <input type="text" class="form-control" formControlName="profesion">
+              <input type="text" class="form-control" formControlName="profesion" id="profesion">
               <label for="exampleFormControlInput3" class="form-label">Residencia</label>
-              <input type="text" class="form-control" formControlName="residencia">
+              <input type="text" class="form-control" formControlName="residencia" id="residencia">
             </div>
           </div>
           <div class="modal-footer">
@@ -84,34 +82,35 @@
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
 
 
     <!-- modal de edición acerca de -->
 
-<div class="modal fade" id="editar_acercade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Editar Acerca de</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Acerca de</label>
-          <textarea class="form-control"></textarea>
+    <form class="modal fade" id="editar_acercaDe{{enc.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="putForm(enc)">
+      <div class="modal-dialog" [formGroup]="editarPersona">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Editar Acerca de</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Acerca de</label>
+              <textarea class="form-control" formControlName="acercaDe" id="acercaDe"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Editar</button>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Editar</button>
-      </div>
-    </div>
-  </div>
-</div>
+    </form>
 
-<!-- modal de eliminar 
+    <!-- modal de eliminar 
 
 <div class="modal fade" id="delete_acercade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">

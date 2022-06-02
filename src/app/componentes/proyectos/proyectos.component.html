@@ -1,47 +1,134 @@
-<div class="est perfil" >
-  
-    <h4 id="titulos">Proyectos</h4>
-  
-      <div class="d-grid gap-2 d-md-flex btn-lg justify-content-md-end">      
-        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_proy">
-          <i class="fas fa-plus"></i>
+<div class="est perfil">
+
+  <h4 id="titulos">Proyectos
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_proy"
+      style="float: right;">
+      <i class="fas fa-plus"></i> Nuevo
+    </button>
+  </h4>
+  <br>
+</div>
+
+
+
+
+
+<li *ngFor="let proyectos of proyectosList" style="list-style-type: none">
+  <div class="row" id="contenedor">
+    <div class="col-lg-3">
+      <img [src]="proyectos.img" width=220px height=100px>
+    </div>
+
+    <div class="col-lg-8">
+      <h3 class="text"><strong>{{proyectos.nombre}}</strong></h3>
+      <h4>{{proyectos.fecha}}</h4>
+      <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
+
+    </div>
+
+    <div class="col-lg-1">
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+          [attr.data-bs-target]="'#editar_proy'+ proyectos.id">
+          <i class="fas fa-pen"></i>
+        </button>
+        <br>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+          [attr.data-bs-target]="'#delete_proy'+ proyectos.id">
+          <i class='fas fa-trash-alt'></i>
         </button>
       </div>
-  
-  
-    
-        
-        <li *ngFor="let proyectos of proyectosList" style="list-style-type: none">
-            <div class="row" id="contenedor">
-              <div class="col-lg-3">
-                <img  [src]="proyectos.img" width=220px height=100px>
-              </div>
-      
-              <div class="col-lg-8">
-                <h3 class="text"><strong>{{proyectos.nombre}}</strong></h3>
-                <h4>{{proyectos.fecha}}</h4>                
-                <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
-                          
-              </div>
-      
-              <div class="col-lg-1">
-                <div class="btn-group-vertical">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_proy">
-                    <i class="fas fa-pen"></i>
-                  </button>
-                  <br>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_proy">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              
-            </div>
-          </li>
+    </div>
 
-        
-    
-    
-</div>
+  </div>
+
+  <!-- modal de eliminar -->
+
+  <div class="modal fade" id="delete_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Proyecto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Esta seguro que desea eliminar la información de Proyectos?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" (click)="(eliminar_proy(proyectos))" class="btn btn-primary">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal de edición Laboral -->
+
+  <form class="modal fade" id="editar_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_proy(proyectos))">
+    <div class="modal-dialog" [formGroup]="editarProyectos">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Editar Proyecto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
+            <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+            <input type="text" class="form-control" formControlName="nombre" id="nombre">
+            <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+            <input type="text" class="form-control" formControlName="fecha" id="fecha">            
+            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+            <input type="text" class="form-control" formControlName="img" id="img">
+            <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
+            <input type="text" class="form-control" formControlName="link" id="link">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Editar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <!-- modal de nuevo laboral -->
+
+  <form class="modal fade" id="nuevo_proy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_proy())">
+    <div class="modal-dialog" [formGroup]="editarProyectos">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
+            <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+            <input type="text" class="form-control" formControlName="nombre" id="nombre">
+            <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+            <input type="text" class="form-control" formControlName="fecha" id="fecha">            
+            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+            <input type="text" class="form-control" formControlName="img" id="img">
+            <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
+            <input type="text" class="form-control" formControlName="link" id="link">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Nuevo</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</li>

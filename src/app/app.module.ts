@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
@@ -18,6 +20,8 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
 import { PorfolioService } from './servicios/porfolio/porfolio.service';
 import { InterceptorService } from './servicios/interceptor/interceptor.service';
 import { ModalComponent } from './componentes/modal/modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -42,6 +46,7 @@ import { ModalComponent } from './componentes/modal/modal.component';
     AppRoutingModule,
     HttpClientModule,
     NgChartsModule,
+    BrowserAnimationsModule,
     
   ],
   providers: [PorfolioService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
