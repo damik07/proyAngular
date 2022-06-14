@@ -37,6 +37,10 @@ export class ProyectosComponent implements OnInit {
 
   };
 
+  alerta(){
+    return sessionStorage.getItem("currentUser");
+  }
+
   eliminar_proy(proyectos: any){
     //console.log(empleos.id);
     this.datosPorfolio.borrarProyecto(proyectos).subscribe(()=>{

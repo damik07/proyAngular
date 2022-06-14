@@ -1,6 +1,6 @@
 <div class="est perfil">
     <h4 id="titulos"><span>Habilidades duras y blandas</span>
-        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_hab"
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="alerta()" data-bs-target="#nuevo_hab"
             style="float: right;">
             <i class="fas fa-plus"></i> Nuevo
         </button>
@@ -30,7 +30,7 @@
                     <h2 class="text">{{habilidades.nombre}}</h2>
                 </div>
 
-                <div class="col-lg-8" style="text-align: center;">
+                <div class="col-lg-8" style="text-align: center;" *ngIf="alerta()">
                 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         [attr.data-bs-target]="'#editar_hab'+ habilidades.id">
@@ -67,7 +67,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button type="button" (click)="(eliminar_hab(habilidades))"
-                                class="btn btn-primary">Eliminar</button>
+                                class="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Editar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Nuevo</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Nuevo</button>
                         </div>
                     </div>
                 </div>

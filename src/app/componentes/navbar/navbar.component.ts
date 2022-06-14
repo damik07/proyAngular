@@ -12,4 +12,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  alerta(){
+    return sessionStorage.getItem("currentUser");
+  }
+
+  cerrar(){
+    sessionStorage.removeItem('currentUser');
+  }
+
 }

@@ -36,10 +36,15 @@ export class HabilidadesComponent implements OnInit {
 
   }
 
+  alerta(){
+    return sessionStorage.getItem("currentUser");
+  }
+
 
   eliminar_hab(habilidades: any){
     //console.log(empleos.id);
     this.datosPorfolio.borrarHabilidad(habilidades).subscribe(()=>{
+      this.ngOnInit();
       //this.laboralList = this.laboralList.filter( (t:any) =>{return t.id !== empleos.id})
       alert("La habilidad seleccionada se ha eliminado correctamente")
     });
@@ -50,6 +55,7 @@ export class HabilidadesComponent implements OnInit {
     this.editHab = this.editarHabilidades.value
     //console.log(this.editLab)
     this.datosPorfolio.editarHabilidad(this.editHab, habilidades).subscribe(()=>{
+      this.ngOnInit();
       alert("La experiencia laboral seleccionada se ha editado correctamente")
     });
     
@@ -60,8 +66,9 @@ export class HabilidadesComponent implements OnInit {
     this.newHab = this.editarHabilidades.value
     
       this.datosPorfolio.nuevaHabilidad(this.newHab).subscribe(newHab=>{
+        this.ngOnInit();
         alert("Se ha registrado una nueva experiencia laboral")
-      this.habilidadesList.push(newHab)
+      //this.habilidadesList.push(newHab)
     }
 
 

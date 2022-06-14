@@ -7,34 +7,27 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  api = "http://localhost:8080/usuario/Ok";
-  currentUserSubject: BehaviorSubject<any>;
+  api = "http://localhost:8080/auth/";
+  
   
 
   constructor(private http:HttpClient) { 
-    console.log("El servicio de autenticación está corriendo");
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}'))
+    
   }
 
   Login(credenciales:any):Observable<any> {
-    console.log(credenciales);
-    return this.http.post(this.api, credenciales).pipe(map(data=>{
-      sessionStorage.setItem('currentUser', JSON.stringify(data));
-      this.currentUserSubject.next(data);
-      
-      return data;
-      
-    }))
+    return this.http.post<any>(this.api + `login`, credenciales)
+   
   }
 
-  get UsuarioAutenticado() {
-    return this.currentUserSubject.value;
+  Nuevo(nuevoUsuario:any):Observable<any> {
+    return this.http.post(this.api + `nuevoUsu`, nuevoUsuario)
+   
   }
 
-  logout() {
-    sessionStorage.removeItem('currentUser');
-  }
+  
 
+  
   public get logIn(): boolean {
     return (sessionStorage.getItem('currentUser') == "true"); //tenia registrado un == !null
   }

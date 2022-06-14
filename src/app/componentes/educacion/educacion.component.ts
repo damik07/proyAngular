@@ -38,9 +38,14 @@ export class EducacionComponent implements OnInit {
 
   }
 
+  alerta(){
+    return sessionStorage.getItem("currentUser");
+  }
+
   eliminar_edu(educacion: any){
     //console.log(empleos.id);
     this.datosPorfolio.borrarEducacion(educacion).subscribe(()=>{
+      this.ngOnInit();
       //this.educacionList = this.educacionList.filter( (t:any) =>{return t.id !== educacion.id})
       alert("La educación seleccionada se a eliminado correctamente")
     }
@@ -52,6 +57,7 @@ export class EducacionComponent implements OnInit {
     this.editEdu = this.editarEducacion.value
     //console.log(this.editLab)
     this.datosPorfolio.editarEducacion(this.editEdu, educacion).subscribe(()=>{
+      this.ngOnInit();
       alert("La educación seleccionada se ha editado correctamente")
     }
     
@@ -64,8 +70,9 @@ export class EducacionComponent implements OnInit {
     this.newEdu = this.editarEducacion.value
     
       this.datosPorfolio.nuevoEducacion(this.newEdu).subscribe(newEdu=>{
+        this.ngOnInit();
         alert("Se ha registrado una nueva educación")
-      this.educacionList.push(newEdu)
+      //this.educacionList.push(newEdu)
     }
 
 

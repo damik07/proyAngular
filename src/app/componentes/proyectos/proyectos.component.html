@@ -1,7 +1,7 @@
 <div class="est perfil">
 
   <h4 id="titulos">Proyectos
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_proy"
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="alerta()" data-bs-target="#nuevo_proy"
       style="float: right;">
       <i class="fas fa-plus"></i> Nuevo
     </button>
@@ -26,7 +26,7 @@
 
     </div>
 
-    <div class="col-lg-1">
+    <div class="col-lg-1" *ngIf="alerta()">
       <div class="btn-group-vertical">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
           [attr.data-bs-target]="'#editar_proy'+ proyectos.id">
@@ -132,3 +132,36 @@
   </form>
 
 </li>
+
+<br>
+<hr>
+<div class="container my-4 w-50">
+
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+      <!-- Diapositivas -->
+      <div class="carousel-inner" *ngFor="let proyectos of proyectosList;let i=index; first as isFirst" >
+          <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
+              <div class="card mb-3">
+                  <img [src]="proyectos.img" class="card-img-top w-100 bg-dark" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{proyectos.nombre}}</h5>
+                    <p class="card-text">{{proyectos.descripcion}}</p>
+                    <p class="card-text">{{proyectos.fecha}}</p>
+                    <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      <!-- Controles -->
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+      </a>
+  </div>
+
+</div><!--//container-->

@@ -1,6 +1,6 @@
 <div class="est perfil" >
     <h4 id="titulos"><span>Educación</span>
-      <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#nuevo_edu"
+      <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="alerta()" data-bs-target="#nuevo_edu"
       style="float: right;">
       <i class="fas fa-plus"></i> Nuevo
     </button>
@@ -55,7 +55,7 @@
                         
             </div>
 
-            <div class="col-lg-1">
+            <div class="col-lg-1" *ngIf="alerta()">
               <div class="btn-group-vertical">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
                 [attr.data-bs-target]="'#editar_educacion'+ educacion.id">
@@ -87,7 +87,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" (click)="(eliminar_edu(educacion))" class="btn btn-primary">Eliminar</button>
+        <button type="button" (click)="(eliminar_edu(educacion))" 
+          class="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
       </div>
     </div>
   </div>
@@ -123,7 +124,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Editar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Editar</button>
       </div>
     </div>
   </div>
@@ -159,7 +160,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Nuevo</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Nuevo</button>
       </div>
     </div>
   </div>

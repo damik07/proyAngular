@@ -40,17 +40,21 @@ export class EncabezadoComponent implements OnInit {
       this.editarPersona
     });
 
-   
+    
+  }
 
-    
-    
+  alerta(){
+    return sessionStorage.getItem("currentUser");
   }
 
   putForm(enc:any){
     console.log(enc.id);
     this.editPers = this.editarPersona.value
     console.log(this.editPers)
-    this.datosPorfolio.editarPersona(this.editPers, enc).subscribe();
+    this.datosPorfolio.editarPersona(this.editPers, enc).subscribe(()=>{
+      this.ngOnInit();
+      alert("El encabezado se ha editado correctamente")
+    });
   }
 
 }
