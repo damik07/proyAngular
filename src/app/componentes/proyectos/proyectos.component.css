@@ -122,3 +122,16 @@
     grid-gap: 10px;
 }
 
+#carouselExampleIndicators{
+    background: #101010;
+    height: 350px;
+}
+#imgCarousel{
+    height: 350px;
+}
+#botonesEdicion{
+    align-items: center;
+    margin-left: center;
+    margin-right: center;
+    
+}

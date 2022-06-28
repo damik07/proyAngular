@@ -36,11 +36,10 @@ svg circle:nth-child(2){
 }
 .container{
     position: relative;
-    width: 900px;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
-    
     justify-content: space-around;
 
 }

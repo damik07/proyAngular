@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PorfolioService } from 'src/app/servicios/porfolio/porfolio.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 
 @Component({
@@ -14,8 +15,9 @@ export class EducacionComponent implements OnInit {
   editarEducacion:any;
   editEdu:any;
   newEdu:any;
+  isLogged = false;
 
-  constructor(private datosPorfolio:PorfolioService) { }
+  constructor(private datosPorfolio:PorfolioService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.datosPorfolio.obtenerDatosEducacion().subscribe(data =>{
@@ -34,13 +36,17 @@ export class EducacionComponent implements OnInit {
     
     });
 
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
+
     
 
   }
 
-  alerta(){
-    return sessionStorage.getItem("currentUser");
-  }
+  
 
   eliminar_edu(educacion: any){
     //console.log(empleos.id);

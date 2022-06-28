@@ -10,17 +10,20 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
 import { LaboralComponent } from './componentes/laboral/laboral.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
+import { interceptorProvider, InterceptorService } from './servicios/interceptor/interceptor.service';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './componentes/login/login.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
 import { NgChartsModule } from 'ng2-charts';
-import { RegistroPersonasComponent } from './componentes/registro-personas/registro-personas.component';
+
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 import { PorfolioService } from './servicios/porfolio/porfolio.service';
-import { InterceptorService } from './servicios/interceptor/interceptor.service';
-import { ModalComponent } from './componentes/modal/modal.component';
+
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 
 
@@ -34,10 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EducacionComponent,
     LoginComponent,
     HabilidadesComponent,
-    ProyectosComponent,
-    RegistroPersonasComponent,
-    PortfolioComponent,
-    ModalComponent
+    ProyectosComponent,    
+    PortfolioComponent,    
+    FooterComponent
   ],
   imports: [
     FormsModule,
@@ -49,7 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     
   ],
-  providers: [PorfolioService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}],
+  providers: [PorfolioService, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

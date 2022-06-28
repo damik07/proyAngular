@@ -21,7 +21,7 @@
   }
 
   .spacer {
-    flex: 1;
+    flex: 2;
   }
 
   .toolbar {
@@ -290,3 +290,15 @@
       visibility: hidden;
     }
   }
+
+  .ftr_social_icon li {
+    display: inline-block;
+    text-align: justify;
+    padding: 10px;
+    
+    
+  }
+  .ftr_social_icon li i{
+    font-size: large;
+  }
+  

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PorfolioService } from 'src/app/servicios/porfolio/porfolio.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 @Component({
   selector: 'app-habilidades',
@@ -13,9 +14,10 @@ export class HabilidadesComponent implements OnInit {
   editarHabilidades:any;
   editHab:any;
   newHab:any;
+  isLogged = false;
   
 
-  constructor(private datosPorfolio:PorfolioService) { }
+  constructor(private datosPorfolio:PorfolioService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.datosPorfolio.obtenerDatosHabilidades().subscribe(data =>{
@@ -33,13 +35,15 @@ export class HabilidadesComponent implements OnInit {
     
     });
 
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
 
   }
 
-  alerta(){
-    return sessionStorage.getItem("currentUser");
-  }
-
+ 
 
   eliminar_hab(habilidades: any){
     //console.log(empleos.id);

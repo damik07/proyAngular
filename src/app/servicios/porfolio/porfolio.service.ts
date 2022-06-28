@@ -21,21 +21,21 @@ export class PorfolioService {
   //Get de las partes del portfolio
  
   obtenerDatosPersona():Observable<any>{
-    return this.http.get<any>(this.url + "ver/personas");
+    return this.http.get<any>(this.url + "auth/ver/personas");
   }
 
   obtenerDatosLaboral():Observable<any>{
-    return this.http.get<any>(this.url + "ver/expLaboral");
+    return this.http.get<any>(this.url + "auth/ver/expLaboral");
   }
 
   obtenerDatosEducacion():Observable<any>{
-    return this.http.get<any>(this.url + "ver/educacion");
+    return this.http.get<any>(this.url + "auth/ver/educacion");
   }
   obtenerDatosHabilidades():Observable<any>{
-    return this.http.get<any>(this.url + "ver/habilidades");
+    return this.http.get<any>(this.url + "auth/ver/habilidades");
   }
   obtenerDatosProyectos():Observable<any>{
-    return this.http.get<any>(this.url + "ver/proyectos");
+    return this.http.get<any>(this.url + "auth/ver/proyectos");
   }
 
 

@@ -1,7 +1,9 @@
+
+
 <div class="est perfil">
 
   <h4 id="titulos">Proyectos
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="alerta()" data-bs-target="#nuevo_proy"
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#nuevo_proy"
       style="float: right;">
       <i class="fas fa-plus"></i> Nuevo
     </button>
@@ -13,155 +15,135 @@
 
 
 
-<li *ngFor="let proyectos of proyectosList" style="list-style-type: none">
-  <div class="row" id="contenedor">
-    <div class="col-lg-3">
-      <img [src]="proyectos.img" width=220px height=100px>
-    </div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
 
-    <div class="col-lg-8">
-      <h3 class="text"><strong>{{proyectos.nombre}}</strong></h3>
-      <h4>{{proyectos.fecha}}</h4>
-      <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
+    
+    <div class="carousel-item" *ngFor="let proyectos of proyectosList; let i = index" [ngClass]="{'active': i === 1}">
+      <img id="imgCarousel" [src]="proyectos.img" class="d-block w-100" [alt]="proyectos.nombre">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 [textContent]="proyectos.nombre"></h5>
+        <p [textContent]="proyectos.fecha"></p>
+        <p [textContent]="proyectos.descripcion"></p>
+        <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
 
-    </div>
-
-    <div class="col-lg-1" *ngIf="alerta()">
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-          [attr.data-bs-target]="'#editar_proy'+ proyectos.id">
-          <i class="fas fa-pen"></i>
-        </button>
-        <br>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-          [attr.data-bs-target]="'#delete_proy'+ proyectos.id">
-          <i class='fas fa-trash-alt'></i>
-        </button>
+        <div id="botonesEdicion" *ngIf="isLogged">
+        
+          <a><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            [attr.data-bs-target]="'#editar_proy'+ proyectos.id">
+            <i class="fas fa-pen"></i>
+          </button></a>          
+          <a><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            [attr.data-bs-target]="'#delete_proy'+ proyectos.id">
+            <i class='fas fa-trash-alt'></i>
+          </button></a>
+          
+        
       </div>
-    </div>
 
-  </div>
+      </div>
 
-  <!-- modal de eliminar -->
+      
+
+      <!-- modal de eliminar -->
 
   <div class="modal fade" id="delete_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Eliminar Proyecto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Esta seguro que desea eliminar la información de Proyectos?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" (click)="(eliminar_proy(proyectos))" class="btn btn-primary">Eliminar</button>
-        </div>
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Esta seguro que desea eliminar la información de Proyectos?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" (click)="(eliminar_proy(proyectos))" class="btn btn-primary">Eliminar</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- modal de edición Laboral -->
+<!-- modal de edición Laboral -->
 
-  <form class="modal fade" id="editar_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_proy(proyectos))">
-    <div class="modal-dialog" [formGroup]="editarProyectos">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Editar Proyecto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
-            <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
-            <input type="text" class="form-control" formControlName="nombre" id="nombre">
-            <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-            <input type="text" class="form-control" formControlName="fecha" id="fecha">            
-            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
-            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
-            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
-            <input type="text" class="form-control" formControlName="img" id="img">
-            <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
-            <input type="text" class="form-control" formControlName="link" id="link">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Editar</button>
+<form class="modal fade" id="editar_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_proy(proyectos))">
+  <div class="modal-dialog" [formGroup]="editarProyectos">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
+          <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+          <input type="text" class="form-control" formControlName="nombre" id="nombre">
+          <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+          <input type="text" class="form-control" formControlName="fecha" id="fecha">
+          <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+          <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+          <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+          <input type="text" class="form-control" formControlName="img" id="img">
+          <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
+          <input type="text" class="form-control" formControlName="link" id="link">
         </div>
       </div>
-    </div>
-  </form>
-
-
-  <!-- modal de nuevo laboral -->
-
-  <form class="modal fade" id="nuevo_proy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_proy())">
-    <div class="modal-dialog" [formGroup]="editarProyectos">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
-            <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
-            <input type="text" class="form-control" formControlName="nombre" id="nombre">
-            <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-            <input type="text" class="form-control" formControlName="fecha" id="fecha">            
-            <label for="exampleFormControlInput3" class="form-label">Descripción</label>
-            <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
-            <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
-            <input type="text" class="form-control" formControlName="img" id="img">
-            <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
-            <input type="text" class="form-control" formControlName="link" id="link">
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Nuevo</button>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Editar</button>
       </div>
     </div>
-  </form>
+  </div>
+</form>
 
-</li>
+
+<!-- modal de nuevo laboral -->
+
+<form class="modal fade" id="nuevo_proy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_proy())">
+  <div class="modal-dialog" [formGroup]="editarProyectos">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nombre del Proyecto</label>
+          <!--<input type="text" [ngModel]="empleos.nombre" class="form-control" formControlName="nombre" id="nombre"> probar corregir el doble binding, error al recargar la pagina-->
+          <input type="text" class="form-control" formControlName="nombre" id="nombre">
+          <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+          <input type="text" class="form-control" formControlName="fecha" id="fecha">
+          <label for="exampleFormControlInput3" class="form-label">Descripción</label>
+          <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"></textarea>
+          <label for="exampleFormControlInput3" class="form-label">Link imagen</label>
+          <input type="text" class="form-control" formControlName="img" id="img">
+          <label for="exampleFormControlInput3" class="form-label">Link proyecto</label>
+          <input type="text" class="form-control" formControlName="link" id="link">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Nuevo</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 <br>
-<hr>
-<div class="container my-4 w-50">
-
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
-      <!-- Diapositivas -->
-      <div class="carousel-inner" *ngFor="let proyectos of proyectosList;let i=index; first as isFirst" >
-          <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
-              <div class="card mb-3">
-                  <img [src]="proyectos.img" class="card-img-top w-100 bg-dark" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{proyectos.nombre}}</h5>
-                    <p class="card-text">{{proyectos.descripcion}}</p>
-                    <p class="card-text">{{proyectos.fecha}}</p>
-                    <p><a class="btn btn-secondary" href={{proyectos.link}}>Más detalles &raquo;</a></p>
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-      <!-- Controles -->
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-      </a>
-  </div>
-
-</div><!--//container-->

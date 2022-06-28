@@ -1,6 +1,6 @@
 <div class="est perfil">
     <h4 id="titulos"><span>Habilidades duras y blandas</span>
-        <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="alerta()" data-bs-target="#nuevo_hab"
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#nuevo_hab"
             style="float: right;">
             <i class="fas fa-plus"></i> Nuevo
         </button>
@@ -30,7 +30,7 @@
                     <h2 class="text">{{habilidades.nombre}}</h2>
                 </div>
 
-                <div class="col-lg-8" style="text-align: center;" *ngIf="alerta()">
+                <div class="col-lg-8" style="text-align: center;" *ngIf="isLogged">
                 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         [attr.data-bs-target]="'#editar_hab'+ habilidades.id">

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/sesion/auth.service';
 import { FormBuilder, FormControl, FormGroup, MinLengthValidator, MinValidator, RequiredValidator } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { TokenService } from 'src/app/servicios/token/token.service';
+import { LoginUsuario } from 'src/app/servicios/models/login-usuario';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,15 @@ import { Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   
   form!: FormGroup;
+  isLogged = false;
+  isLoginFail = false;
+  loginUsuario!: LoginUsuario;
+  roles: string[] = [];
+  errMje!:string;
 
-  constructor(private formBuilder: FormBuilder, private authService:AuthService, private ruta:Router) { 
+  constructor(private tokenService: TokenService, private formBuilder: FormBuilder, private authService:AuthService, private ruta:Router) { 
     this.form=this.formBuilder.group({
-      usuario:['',[Validators.required, Validators.minLength(5),Validators.maxLength(12)]],
+      nombreUsuario:['',[Validators.required, Validators.minLength(5),Validators.maxLength(12)]],
       email:['',[Validators.required, Validators.email]],
       password:['',[Validators.required, Validators.minLength(8)]]
       
@@ -23,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   get Usuario(){
-    return this.form.get("usuario");
+    return this.form.get("nombreUsuario");
   }
 
   get Mail(){
@@ -39,20 +46,26 @@ export class LoginComponent implements OnInit {
   onEnviar(event: Event) {
     event.preventDefault;
     
-    if (
-    this.authService.Login(this.form.value).subscribe(data=>{JSON.stringify(data);console.log("Data: "+ JSON.stringify(data));})
-    //this.authService.Login(this.form.value).subscribe(this.authService.UsuarioAutenticado)
     
+    this.authService.Login(this.form.value).subscribe(data=>{
+      this.isLogged = true;
+      this.tokenService.setToken(data.token);
+      this.tokenService.setUserName(data.nombreUsuario);
+      this.tokenService.setAuthorities(data.authorities);
+      this.roles = data.authorities;
 
-    )
-    {this.ruta.navigate(['/portfolio']);
-    console.log("Data: 1");
+      this.ruta.navigate(['/portfolio']);
+      console.log("Data: 1");
+    },
 
-
-    } else {
-      this.form.markAllAsTouched();
-      console.log("Data: 2");
-    }
+     err => {
+      //this.form.markAllAsTouched();
+      
+      this.isLogged = false;
+      this.isLoginFail = true;
+      this.errMje = err.error.mensaje;
+      console.log(this.errMje);
+    })
   }
 
 
@@ -68,18 +81,23 @@ export class LoginComponent implements OnInit {
     return false
   }
 
-  public usuario = new FormControl('', Validators.required);
+  public nombreUsuario = new FormControl('', Validators.required);
   public email = new FormControl('', Validators.required);
 
   public password = new FormControl('', Validators.required);
 
   public newForm = new FormGroup({
-    usuario: this.usuario,
+    nombreUsuario: this.nombreUsuario,
     email: this.email,
     password: this.password,
   })
 
   ngOnInit(): void {
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+      this.roles = this.tokenService.getAuthorities();
+    }
+
   }
 
 }

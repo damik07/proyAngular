@@ -3,6 +3,7 @@ import { PorfolioService } from 'src/app/servicios/porfolio/porfolio.service';
 import { AuthService } from 'src/app/servicios/sesion/auth.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 
 
@@ -20,6 +21,7 @@ export class LaboralComponent implements OnInit {
   faPen = faPen;
   newLab:any;
   editLab:any;
+  isLogged = false;
   
   
 
@@ -27,7 +29,7 @@ export class LaboralComponent implements OnInit {
 
 
   
-  constructor(private datosPorfolio:PorfolioService, private fb:FormBuilder) { }
+  constructor(private datosPorfolio:PorfolioService, private fb:FormBuilder, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.datosPorfolio.obtenerDatosLaboral().subscribe(data =>{
@@ -46,14 +48,17 @@ export class LaboralComponent implements OnInit {
     
     });
 
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
+
     
 
   }
 
-  alerta(){
-    return sessionStorage.getItem("currentUser");
-  }
-
+ 
   eliminar_lab(empleos:any){
     
     

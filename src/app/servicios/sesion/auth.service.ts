@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs';
+import { JwtDto } from '../models/jwt-dto';
+import { LoginUsuario } from '../models/login-usuario';
+import { NuevoUsuario } from '../models/nuevo-usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +18,13 @@ export class AuthService {
     
   }
 
-  Login(credenciales:any):Observable<any> {
-    return this.http.post<any>(this.api + `login`, credenciales)
+  Login(credenciales:LoginUsuario):Observable<JwtDto> {
+    
+    return this.http.post<JwtDto>(this.api + `login`, credenciales)
    
   }
 
-  Nuevo(nuevoUsuario:any):Observable<any> {
+  Nuevo(nuevoUsuario:NuevoUsuario):Observable<any> {
     return this.http.post(this.api + `nuevoUsu`, nuevoUsuario)
    
   }

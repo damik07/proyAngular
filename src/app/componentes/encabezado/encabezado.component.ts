@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PorfolioService } from 'src/app/servicios/porfolio/porfolio.service';
-import { ModalComponent } from '../modal/modal.component';
+
 import { AuthService } from 'src/app/servicios/sesion/auth.service';
 import { FormBuilder, FormControl, FormGroup, MinLengthValidator, MinValidator, RequiredValidator } from '@angular/forms';
 import { map } from 'rxjs';
+import { TokenService } from 'src/app/servicios/token/token.service';
 
 
 @Component({
@@ -16,9 +17,10 @@ export class EncabezadoComponent implements OnInit {
   miEncabezado:any;
   persona:any;
   editPers:any;
+  isLogged = false;
   
 
-  constructor(private datosPorfolio:PorfolioService, private formBuilder: FormBuilder ) { }
+  constructor(private datosPorfolio:PorfolioService, private formBuilder: FormBuilder, private tokenService:TokenService ) { }
     
   editarPersona = new FormGroup({
     id: new FormControl (''),
@@ -40,13 +42,15 @@ export class EncabezadoComponent implements OnInit {
       this.editarPersona
     });
 
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
     
   }
 
-  alerta(){
-    return sessionStorage.getItem("currentUser");
-  }
-
+  
   putForm(enc:any){
     console.log(enc.id);
     this.editPers = this.editarPersona.value
