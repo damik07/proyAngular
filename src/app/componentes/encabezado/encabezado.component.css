@@ -44,3 +44,19 @@
     margin-top: 20px;
 
 }
+#acercaDe{
+    position: relative;
+    color: rgb(241, 240, 240);    
+    letter-spacing: 1px;
+    
+    transition: 0.5s;
+    margin-top: 20px;
+}
+#nombreProp{
+    position: relative;
+    color: rgb(241, 240, 240);    
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s;
+    margin-top: 20px;
+}

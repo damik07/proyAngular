@@ -13,10 +13,10 @@
 
     <div class="col-lg-3">
       <img id="fotoPerfil" [src]="enc.img_perfil">
-      <h3 class="text">{{enc.nombre}} {{enc.apellido}}</h3>
+      <h3 id="nombreProp">{{enc.nombre}} {{enc.apellido}}</h3>
 
-      <h4>{{enc.profesion}}</h4>
-      <p>{{enc.residencia}}</p>
+      <h4 id="acercaDe">{{enc.profesion}}</h4>
+      <p id="acercaDe">{{enc.residencia}}</p>
       <p><a class="btn btn-secondary" href="#">Más detalles &raquo;</a>" "<button type="button" class="btn btn-primary"
           data-bs-toggle="modal" *ngIf="isLogged" [attr.data-bs-target]="'#editar_infopersona'+ enc.id">
           <i class='fas fa-pen'></i>
@@ -27,8 +27,8 @@
     <br>
 
     <div class="col-lg-8">
-      <h4 class="text">Acerca de</h4>
-      <p>{{enc.acercaDe}}</p>
+      <h4 class="text" >Acerca de</h4>
+      <p id="acercaDe">{{enc.acercaDe}}</p>
 
     </div>
     <div class="col-lg-1" *ngIf="isLogged">
