@@ -60,13 +60,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" (click)="(eliminar_proy(proyectos))" class="btn btn-primary">Eliminar</button>
+        <button type="button" (click)="(eliminar_proy(proyectos))" class="btn btn-primary" data-bs-dismiss="modal">Eliminar</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- modal de edición Laboral -->
+<!-- modal de edición Proyecto -->
 
 <form class="modal fade" id="editar_proy{{proyectos.id}}" data-bs-backdrop="static" data-bs-keyboard="false"
   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(editar_proy(proyectos))">
@@ -93,21 +93,21 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Editar</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Editar</button>
       </div>
     </div>
   </div>
 </form>
 
 
-<!-- modal de nuevo laboral -->
+<!-- modal de nuevo Proyecto -->
 
 <form class="modal fade" id="nuevo_proy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true" (ngSubmit)="(nuevo_proy())">
   <div class="modal-dialog" [formGroup]="editarProyectos">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Nueva Experiencia Laboral</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Nuevo Proyecto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -128,7 +128,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Nuevo</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Nuevo</button>
       </div>
     </div>
   </div>
