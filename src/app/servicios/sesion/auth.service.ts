@@ -10,7 +10,7 @@ import { NuevoUsuario } from '../models/nuevo-usuario';
   providedIn: 'root'
 })
 export class AuthService {
-  api = "http://localhost:8080/auth/";
+  api = "https://nameless-springs-70391.herokuapp.com/auth/";
   
   
 

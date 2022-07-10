@@ -9,7 +9,7 @@ import { LaboralComponent } from 'src/app/componentes/laboral/laboral.component'
 })
 export class PorfolioService {
 
-  url:string='http://localhost:8080/';
+  url:string='https://nameless-springs-70391.herokuapp.com/';
 
   httpOptions = {headers: new HttpHeaders({
     'Content-Type':'application/json'
